@@ -1,12 +1,21 @@
 #include <boost/dll.hpp>
+#include <entt/meta/factory.hpp>
 #include <entt/meta/meta.hpp>
 #include <iostream>
 
+ENTT_NAMED_TYPE(uint32_t)
+
 int main() {
+    entt::meta<uint32_t>().type();
+
     auto library = boost::dll::shared_library{
             "shared_lib",
             boost::dll::load_mode::append_decorations,
     };
+
+    using set_ctx_type = void(*)(entt::meta_ctx);
+    library.get<set_ctx_type>("set_ctx")(entt::meta_ctx{});
+
     typedef entt::meta_any (*get_uint32_fn)();
     auto the_any = library.get<get_uint32_fn>("get_uint32_t")();
 
