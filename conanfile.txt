@@ -1,0 +1,6 @@
+[requires]
+entt/3.1.0@skypjack/stable
+boost/1.69.0@conan/stable
+
+[generators]
+cmake_find_package
